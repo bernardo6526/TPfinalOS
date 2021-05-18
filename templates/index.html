@@ -1,13 +1,61 @@
-<html>
-<head>
-<title>Flask Tutorial</title>
-<script src="{{ url_for('static',filename='scripts/script.js') }}"></script>
-<link rel="stylesheet" href="{{ url_for('static',filename='estilos/estilo.css') }}"/>
-</head>
-<body>
-<h1>This is the Index page</h1>
-<img src="{{ url_for('static',filename='imagens/teste.png') }}"/>
-<button onclick="myFunction()">Click me</button>
-<p id="demo"></p>
-</body>
-</html>  
+{% extends 'template.html'%}
+{% block title %}
+Otimizador de Rotas Aéreas
+{% endblock %}
+{% block content %}
+
+<header class="headerBar dark">
+    <div class="logo"><img src="{{ url_for('static',filename='imagens/airplane.png') }}"></div>
+    <div class="appName left">Otimizador de Rotas Aéreas</div>
+</header>
+<nav id="nav" class="navBar bottom">
+    <div class="buttonGroup">
+        <button id="tab2" class="button tab active" for="tela2">Dispensa</button>
+        <button id="tab1" class="button tab" for="tela1">
+            Listas de Compras
+        </button>
+    </div>
+</nav>
+
+<div id="tela1" class="component hidden">
+    <div class="componentContent">
+        <div class="componentHeader">
+            <h1>Resultado Otimização</h1>
+            <button id="addCompra" class="button primary mvLeft3">
+                Otimizar
+            </button>
+        </div>
+        <ul class="list mt4" id="listaCompras">
+        </ul>
+    </div>
+</div>
+
+<div id="tela2" class="component hidden">
+    <div class="componentContent">
+      <div class="componentHeader">
+        <h1>Itens da Dispensa</h1>
+        <button id="addDispensa" class="button primary mvLeft3">
+          <img src="{{ url_for('static',filename='imagens/plus1.png') }}" />
+        </button>
+      </div>
+      <div class="tableHeader">
+        <table class="table">
+          <tr>
+            <th>Item</th>
+            <th>Qtd</th>
+            <th>Unidade</th>
+            <th>Validade</th>
+          </tr>
+        </table>
+      </div>
+      <table id ="dispensa" class="table mt6">
+        <tr>
+          <td>Torta de mousse de limão</td>
+          <td>12</td>
+          <td>unidade</td>
+          <td>11/04/2021</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+{% endblock %}
