@@ -1,0 +1,13 @@
+<html>
+<head>
+<title>Flask Tutorial</title>
+<script src="{{ url_for('static',filename='scripts/script.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static',filename='estilos/estilo.css') }}"/>
+</head>
+<body>
+<h1>This is the Index page</h1>
+<img src="{{ url_for('static',filename='imagens/teste.png') }}"/>
+<button onclick="myFunction()">Click me</button>
+<p id="demo"></p>
+</body>
+</html>  
