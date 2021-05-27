@@ -1,14 +1,20 @@
 
-let campeoes = [
+contador = 0
+/*let campeoes = [
     {"id":0,"nome":"Corki","mana":true,"ad":1, "ap":0, "tank":0 ,"armor":0, "mr":0,
      "letalidade":0,"magicPenFlat":1,"armorPen":0,"magicPen":1}
     
-];
+]; */
+
+let campeoes = [];
 
 
 onload = () => {
-    const dadosCarregados = JSON.parse(localStorage.getItem('dados'));
-    if (dadosCarregados) dados = dadosCarregados;
+    //const dadosCarregados = JSON.parse(localStorage.getItem('dados'));
+    // if (dadosCarregados) dados = dadosCarregados;
+
+    addCampeao("Corki",0,0,1,1,1,1,0,0,0,0.5,1,1,0,0,1,1,1,1,1,1,1);
+    console.log(campeoes);
 
     // cria um objeto com as abas
     let tabs = document.querySelectorAll('.navBar .tab');
@@ -62,7 +68,7 @@ const mostraCampeoes = () => {
       // cria o elemento da lista
       let lista = document.createElement('li');
       let label = document.createElement('label');
-      label.innerHTML = i.nome;
+      label.innerHTML = i.name;
       label.setAttribute('data-id', i.id);
       label.setAttribute('class', 'blockLabel'); // aumenta a area para clicar no label
       lista.appendChild(label);
@@ -70,13 +76,13 @@ const mostraCampeoes = () => {
       label.onclick = () => {
         ativa('tela2');
         // muda o nome da tela de build
-        let tituloCompra = document.querySelector('#lblnome');
-        tituloCompra.innerHTML = i.nome + " build";
-        tituloCompra.innerHTML = "Preencha os dados sobre a partida";
-        // mostra a tela de build
-        ativa('tela2');
+        let tituloPagina = document.querySelector('#lblnome');
+        //tituloCompra.innerHTML = i.name + " build";
+        tituloPagina.innerHTML = "Preencha os dados sobre a partida";
         // chama o preenchimento de dados
         preencheFormCampeao(i.id);
+        // mostra a tela de build
+        ativa('tela2');        
       };
   
       champs.appendChild(lista);
@@ -87,15 +93,64 @@ const mostraCampeoes = () => {
   function preencheFormCampeao(id){
     var campeao = campeoes.filter((obj) => obj.id == id);
     campeao = campeao[0];
-    document.getElementById("formNome").value = campeao.nome;
-    document.getElementById("formMana").value = campeao.mana;
-    document.getElementById("formAd").value = campeao.ad;
-    document.getElementById("formAp").value = campeao.ap;
+    document.getElementById("formNome").value = campeao.name;
     document.getElementById("formTank").value = campeao.tank;
+    document.getElementById("formSuporte").value = campeao.suporte;
+
+    document.getElementById("formAd").value = campeao.ad;
+    document.getElementById("formAtksp").value = campeao.atksp;
+    document.getElementById("formCrit").value = campeao.crit;
+    document.getElementById("formLs").value = campeao.ls;
+    document.getElementById("formLet").value = campeao.let;
+    document.getElementById("formARMP").value = campeao.ARMP;
+    
+    document.getElementById("formAp").value = campeao.ap;
+    document.getElementById("formAh").value = campeao.ah;
+    document.getElementById("formMana").value = campeao.mana;
+    document.getElementById("formManaRegen").value = campeao.manaRegen;
+    document.getElementById("formHeal").value = campeao.heal;
+    document.getElementById("formSp").value = campeao.sp;
+    document.getElementById("formOv").value = campeao.ov;
+    document.getElementById("formFmp").value = campeao.fmp;
+    document.getElementById("formMp").value = campeao.mp;
+
+    document.getElementById("formHealth").value = campeao.health;
     document.getElementById("formArmor").value = campeao.armor;
     document.getElementById("formMr").value = campeao.mr;
-    document.getElementById("formLetalidade").value = campeao.letalidade;
-    document.getElementById("formMagicPenFlat").value = campeao.magicPenFlat;
-    document.getElementById("formArmorPen").value = campeao.armorPen;
-    document.getElementById("formMagicPen").value = campeao.magicPen;
+    document.getElementById("formHr").value = campeao.hr;
   }
+
+function addCampeao(name, tank, suporte, ad, atksp, crit, ls, 
+    let, ARMP, ap,ah, mana, manaRegen, heal, sp, ov, fmp, mp, health, armor, mr, hr){
+    campeao = {
+          "id": contador,
+          "name": name,
+          "tank": tank,
+          "suporte" : suporte,
+          //offensive stats
+          "ad": ad,
+          "atksp": atksp,
+          "crit": crit,
+          "ls": ls,
+          "let": let,
+          "ARMP": ARMP,
+          //magical stats
+          "ap": ap,
+          "ah": ah,
+          "mana": mana,
+          "manaRegen": manaRegen,
+          "heal": heal,
+          "sp": sp,
+          "ov": ov,
+          "fmp": fmp,
+          "mp": mp,
+          //defensive stats
+          "health": health,
+          "armor": armor,
+          "mr": mr,
+          "hr": hr,
+        }
+    
+    campeoes.push(campeao)
+    contador += 1
+}
