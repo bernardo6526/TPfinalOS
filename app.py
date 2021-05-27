@@ -17,12 +17,53 @@ def form_get():
     else: #é feito um get quando a página é carregada
 	    return render_template("index.html")
 
-# creating list       
-itens = {
-  0:{"nome": "Eco de Luden",
-   "ap": 100,
-   "mana": 100},
-  1:{"nome": "Cajado do Vazio",
-   "ap": 100,
-   "mana": 0}
-}
+
+#Offensive stats include attack damage(AD), attack speed(AS), critical strike chance(Crit), life steal(LS), 
+#lethality(Let) and armorPen(ARMP).
+
+#Magical stats include ability power(AP), 
+#ability haste(AH), mana, mana regeneration(manaRegen), heal , shield power(SP), omnivamp(OV), 
+# and flatMagicPen(FMP) and magicPen(MP).
+
+#Defensive stats include health, armor, magic resistance(MR), and health regeneration(HR).
+contador = 0
+itens = {}
+
+def addItem(name, ad, atksp, crit, ls, let, ARMP, ah, mana, manaRegen, heal, sp, ov, fmp, mp, health, armor, mr, hr):
+  global contador
+  item = {
+      contador:{
+        "name": name,
+        #offensive stats
+        "ad": ad,
+        "as": atksp,
+        "crit": crit,
+        "ls": ls,
+        "let": let,
+        "ARMP": ARMP,
+        #magical stats
+        "ah": ah,
+        "mana": mana,
+        "manaRegen": manaRegen,
+        "heal": heal,
+        "sp": sp,
+        "ov": ov,
+        "fmp": fmp,
+        "mp": mp,
+        #defensive stats
+        "health": health,
+        "armor": armor,
+        "mr": mr,
+        "hr": hr,
+      }
+  }
+  itens.update(item)
+  contador += 1
+
+addItem("Eco de Luden",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+addItem("Cajado do Vazio",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+
+
+
+
+

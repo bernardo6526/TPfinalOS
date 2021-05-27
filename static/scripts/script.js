@@ -88,4 +88,14 @@ const mostraCampeoes = () => {
     var campeao = campeoes.filter((obj) => obj.id == id);
     campeao = campeao[0];
     document.getElementById("formNome").value = campeao.nome;
+    document.getElementById("formMana").value = campeao.mana;
+    document.getElementById("formAd").value = campeao.ad;
+    document.getElementById("formAp").value = campeao.ap;
+    document.getElementById("formTank").value = campeao.tank;
+    document.getElementById("formArmor").value = campeao.armor;
+    document.getElementById("formMr").value = campeao.mr;
+    document.getElementById("formLetalidade").value = campeao.letalidade;
+    document.getElementById("formMagicPenFlat").value = campeao.magicPenFlat;
+    document.getElementById("formArmorPen").value = campeao.armorPen;
+    document.getElementById("formMagicPen").value = campeao.magicPen;
   }
