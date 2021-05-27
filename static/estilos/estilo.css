@@ -539,3 +539,8 @@
   .hidden{
     visibility: hidden;
   }
+
+  a {
+    color: white;
+    text-decoration: none; /* no underline */
+  }

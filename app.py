@@ -12,11 +12,17 @@ if __name__ == '__main__':
 @app.route("/home", methods=["POST", "GET"])
 def form_get():
     if request.method == "POST": #post feito no submit
-	    user = request.form["dano"]
-	    return redirect(url_for("user", usr=user))
+	    dadosForm = request.form
+	    return render_template("build.html",dados=dadosForm,build=itens)
     else: #é feito um get quando a página é carregada
 	    return render_template("index.html")
 
-@app.route("/dano<usr>")
-def user(usr):
-    return f"<h1>{usr}</h1>"
+# creating list       
+itens = {
+  0:{"nome": "Eco de Luden",
+   "ap": 100,
+   "mana": 100},
+  1:{"nome": "Cajado do Vazio",
+   "ap": 100,
+   "mana": 0}
+}

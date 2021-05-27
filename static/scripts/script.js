@@ -1,11 +1,10 @@
 
 let campeoes = [
-    {"id":0,"nome":"Corki","mana":true,"ad":1, "ap":0, "armor":0, "mr":0,
+    {"id":0,"nome":"Corki","mana":true,"ad":1, "ap":0, "tank":0 ,"armor":0, "mr":0,
      "letalidade":0,"magicPenFlat":1,"armorPen":0,"magicPen":1}
     
 ];
 
-let dados = [];
 
 onload = () => {
     const dadosCarregados = JSON.parse(localStorage.getItem('dados'));
@@ -73,15 +72,20 @@ const mostraCampeoes = () => {
         // muda o nome da tela de build
         let tituloCompra = document.querySelector('#lblnome');
         tituloCompra.innerHTML = i.nome + " build";
+        tituloCompra.innerHTML = "Preencha os dados sobre a partida";
         // mostra a tela de build
         ativa('tela2');
-        // atualiza o idLista
-        idLista = i.id;
-        // carrega os produtos
-        mostraProdutosCompra();
+        // chama o preenchimento de dados
+        preencheFormCampeao(i.id);
       };
   
       champs.appendChild(lista);
   
     }); // fim do for
   }; // fim mostraCampeoes
+
+  function preencheFormCampeao(id){
+    var campeao = campeoes.filter((obj) => obj.id == id);
+    campeao = campeao[0];
+    document.getElementById("formNome").value = campeao.nome;
+  }

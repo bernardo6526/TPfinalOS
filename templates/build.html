@@ -1,0 +1,33 @@
+{% extends 'template.html'%}
+{% block title %}
+League Best Build
+{% endblock %}
+{% block content %}
+
+<header class="headerBar dark">
+  <div class="logo"><img src="{{ url_for('static',filename='imagens/logo.png') }}"></div>
+  <div class="appName left">League Best Build</div>
+</header>
+
+<nav id="nav" class="navBar bottom">
+  <div class="buttonGroup">
+    <button id="tab1" class="button tab active" for="tela1">
+      <a href="home">Inicio</a>
+    </button>
+  </div>
+</nav>
+
+<div id="tela1" class="component">
+  <div class="componentContent">
+    <div class="componentHeader">
+      <h1>Build do {{dados["nome"]}}</h1>
+    </div>
+    <ul class="list mt4">
+      {% for key,value in build.items() %}
+        <li><label class="blockLabel">{{ value['nome'] }}</label></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% endblock %}
