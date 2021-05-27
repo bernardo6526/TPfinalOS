@@ -12,7 +12,11 @@ League Best Build
 <nav id="nav" class="navBar bottom">
   <div class="buttonGroup">
     <button id="tab1" class="button tab active" for="tela1">
-      <a href="home">Inicio</a>
+      <a href="home">
+        <div class="link">
+          Inicio
+        </div>
+      </a>
     </button>
   </div>
 </nav>
@@ -20,11 +24,11 @@ League Best Build
 <div id="tela1" class="component">
   <div class="componentContent">
     <div class="componentHeader">
-      <h1>Build do {{dados["nome"]}}</h1>
+      <h1>{{campeao["nome"]}} build</h1>
     </div>
     <ul class="list mt4">
       {% for key,value in build.items() %}
-        <li><label class="blockLabel">{{ value['name'] }}</label></li>
+      <li><label class="blockLabel">{{ value['name'] }}</label></li>
       {% endfor %}
     </ul>
   </div>

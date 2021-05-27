@@ -1,5 +1,10 @@
 from flask import Flask, redirect, url_for, render_template, request
 
+contador = 0
+itens = {}
+campeao = []
+
+
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
@@ -12,8 +17,8 @@ if __name__ == '__main__':
 @app.route("/home", methods=["POST", "GET"])
 def form_get():
     if request.method == "POST": #post feito no submit
-	    dadosForm = request.form
-	    return render_template("build.html",dados=dadosForm,build=itens)
+	    campeao = request.form
+	    return render_template("build.html",campeao=campeao,build=itens)
     else: #é feito um get quando a página é carregada
 	    return render_template("index.html")
 
@@ -26,14 +31,17 @@ def form_get():
 # and flatMagicPen(FMP) and magicPen(MP).
 
 #Defensive stats include health, armor, magic resistance(MR), and health regeneration(HR).
-contador = 0
-itens = {}
 
-def addItem(name, ad, atksp, crit, ls, let, ARMP, ah, mana, manaRegen, heal, sp, ov, fmp, mp, health, armor, mr, hr):
+def addItem(name, valor, peso, mitico, bota, ad, atksp, crit, ls, let, ARMP, ah, mana, manaRegen, heal, sp, ov, fmp, mp, health, armor, mr, hr):
   global contador
   item = {
       contador:{
+        #dados do problema
         "name": name,
+        "valor": valor,
+        "peso" : peso,
+        "mitico": mitico,
+        "bota": bota,
         #offensive stats
         "ad": ad,
         "as": atksp,
@@ -60,8 +68,35 @@ def addItem(name, ad, atksp, crit, ls, let, ARMP, ah, mana, manaRegen, heal, sp,
   itens.update(item)
   contador += 1
 
-addItem("Eco de Luden",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
-addItem("Cajado do Vazio",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+addItem(
+  #name,         valor, peso, mitico, bota
+  "Eco de Luden",-200,    1,    0,      0,
+  #ad,atksp, crit, ls, let, ARMP
+  0,  0,      0,    0,  0,  0,
+  #ah, mana, manaRegen, heal, sp, ov, fmp, mp
+  0,   0,       0,       0,   0,  0,   0,  0,
+  #health, armor, mr, hr
+  0,          0,    0,0
+)
+
+addItem(
+  #name,         valor, peso, mitico, bota
+  "Gume do Infinito",-200,    1,    0,      0,
+  #ad,atksp, crit, ls, let, ARMP
+  0,  0,      0,    0,  0,  0,
+  #ah, mana, manaRegen, heal, sp, ov, fmp, mp
+  0,   0,       0,       0,   0,  0,   0,  0,
+  #health, armor, mr, hr
+  0,          0,    0,0
+)
+
+#calcular valor para cada item
+#valor = 0
+#for item in itens:
+  #valor = item['ad']*
+
+#rodar codigo de otimizacao e preencher vetor build com os melhores itens escolhidos
+
 
 
 
