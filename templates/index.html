@@ -1,18 +1,18 @@
 {% extends 'template.html'%}
 {% block title %}
-Otimizador de Rotas Aéreas
+League Best Build
 {% endblock %}
 {% block content %}
 
 <header class="headerBar dark">
-    <div class="logo"><img src="{{ url_for('static',filename='imagens/airplane.png') }}"></div>
-    <div class="appName left">Otimizador de Rotas Aéreas</div>
+    <div class="logo"><img src="{{ url_for('static',filename='imagens/logo.png') }}"></div>
+    <div class="appName left">League Best Build</div>
 </header>
+
 <nav id="nav" class="navBar bottom">
     <div class="buttonGroup">
-        <button id="tab2" class="button tab active" for="tela2">Dispensa</button>
-        <button id="tab1" class="button tab" for="tela1">
-            Listas de Compras
+        <button id="tab1" class="button tab active" for="tela1">
+            Inicio
         </button>
     </div>
 </nav>
@@ -20,42 +20,39 @@ Otimizador de Rotas Aéreas
 <div id="tela1" class="component hidden">
     <div class="componentContent">
         <div class="componentHeader">
-            <h1>Resultado Otimização</h1>
-            <button id="addCompra" class="button primary mvLeft3">
-                Otimizar
-            </button>
+            <h1>Champions</h1>
         </div>
-        <ul class="list mt4" id="listaCompras">
+        <ul class="list mt4" id="listaCampeoes">
         </ul>
     </div>
 </div>
 
 <div id="tela2" class="component hidden">
-    <div class="componentContent">
-      <div class="componentHeader">
-        <h1>Itens da Dispensa</h1>
-        <button id="addDispensa" class="button primary mvLeft3">
-          <img src="{{ url_for('static',filename='imagens/plus1.png') }}" />
-        </button>
-      </div>
-      <div class="tableHeader">
-        <table class="table">
-          <tr>
-            <th>Item</th>
-            <th>Qtd</th>
-            <th>Unidade</th>
-            <th>Validade</th>
-          </tr>
-        </table>
-      </div>
-      <table id ="dispensa" class="table mt6">
-        <tr>
-          <td>Torta de mousse de limão</td>
-          <td>12</td>
-          <td>unidade</td>
-          <td>11/04/2021</td>
-        </tr>
-      </table>
+  <form method="POST">
+    <div class="componentHeader mt1">
+      <h1 class="componentTitle mvLeft2" id="lblNome"></h1>
     </div>
-  </div>
+    <div class="componentContent">
+      <div class="slidecontainer" id="DanoInimigo">
+        <label class="fixed" for="inputNovaTarefa">Dano inimigo:</label>
+        <label id="inimigoAD">AD=3</label>/<label id="inimigoAP">AP=2</label>
+        <input name="dano" type="range" id="dano" min="0" max="5" value="3" class="slider" onChange="atualizaSlider()">
+      </div>
+
+      <div class="field slidecontainer" id="TankInimigo">
+        <label class="fixed" for="inputNovaTarefa">Inimigos Tank:</label>
+        <input name="tanks" type="number" id="tanks" min="0" max="5" value="" >
+      </div>
+      
+      <div class="buttonGroup mt1 center">
+        <button id="btnCanc" class="button quarter light">Cancelar</button>
+        <input type="submit" id="btnInc" class="button quarter primary" value="Otimizar"/>
+      </div>
+
+      <div class="field slidecontainer hidden" id="TankInimigo">
+        <label class="fixed" for="inputNovaTarefa">Inimigos Tank:</label>
+        <input name="dados" type="number" id="tanks" min="0" max="5" value="" >
+      </div>
+  </form>
+</div>
 {% endblock %}

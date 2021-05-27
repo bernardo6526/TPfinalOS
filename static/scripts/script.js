@@ -1,4 +1,10 @@
 
+let campeoes = [
+    {"id":0,"nome":"Corki","mana":true,"ad":1, "ap":0, "armor":0, "mr":0,
+     "letalidade":0,"magicPenFlat":1,"armorPen":0,"magicPen":1}
+    
+];
+
 let dados = [];
 
 onload = () => {
@@ -27,5 +33,55 @@ onload = () => {
         mostra(e.target);
     };
 
+    const inicio = document.getElementById("tab1");
+    inicio.onclick = () => {
+        ativa('tela1');
+    };
+
     mostra();
+    mostraCampeoes();
 };
+
+const ativa = (comp) => {
+    let listaDeTelas = document.querySelectorAll('body > .component');
+    listaDeTelas.forEach((c) => c.classList.add('hidden'));
+    document.querySelector('#' + comp).classList.remove('hidden');
+};
+
+function atualizaSlider(){
+    const inimigoAD = document.querySelector('#inimigoAD');
+    const inimigoAP = document.querySelector('#inimigoAP');
+    var dano = document.getElementById("dano").value;
+    inimigoAD.innerHTML = 'AD='+dano;
+    inimigoAP.innerHTML = 'AP='+(5-dano);
+}
+
+const mostraCampeoes = () => {
+    const champs = document.querySelector('#listaCampeoes');
+    champs.innerHTML = '';
+    campeoes.forEach((i) => {
+      // cria o elemento da lista
+      let lista = document.createElement('li');
+      let label = document.createElement('label');
+      label.innerHTML = i.nome;
+      label.setAttribute('data-id', i.id);
+      label.setAttribute('class', 'blockLabel'); // aumenta a area para clicar no label
+      lista.appendChild(label);
+  
+      label.onclick = () => {
+        ativa('tela2');
+        // muda o nome da tela de build
+        let tituloCompra = document.querySelector('#lblnome');
+        tituloCompra.innerHTML = i.nome + " build";
+        // mostra a tela de build
+        ativa('tela2');
+        // atualiza o idLista
+        idLista = i.id;
+        // carrega os produtos
+        mostraProdutosCompra();
+      };
+  
+      champs.appendChild(lista);
+  
+    }); // fim do for
+  }; // fim mostraCampeoes

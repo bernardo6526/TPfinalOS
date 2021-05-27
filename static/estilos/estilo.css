@@ -146,7 +146,7 @@
     min-width: 3rem;
     padding: 0.25rem 0.75rem;
     border-radius: 0.5rem;
-    background-color: #45a752;
+    background-color: #0e66ad;
     border: thin solid #dce5e8;
     color: #fff;
     line-height: 1rem;
@@ -275,7 +275,7 @@
   
   .list li.active {
     color: #fff;
-    background: #45a752;;
+    background: #0e66ad;;
     border: thin solid #2a679b;
   }
   
@@ -327,7 +327,7 @@
     padding-top: 0.8rem;
     padding-bottom: 0.8rem;
     text-align: center;
-    background-color: #45a752;
+    background-color: #0e66ad;
     color: white;
   }
 
@@ -339,7 +339,7 @@
     width: 91%;
     display: flex;
     justify-content: space-evenly;
-    background-color: #45a752;
+    background-color: #0e66ad;
     padding:0;
     margin-right:2rem;
   }
@@ -359,22 +359,22 @@
   
   /* cores */
   .active {
-    color: #000;
-    background: #4ce260;
-    border: thin solid #7ef35b;
+    color: #fff;
+    background: #0e66ad;
+    border: thin solid #6ab4d1;
   }
   .active:active {
-    background: #259233;
-    border: thin solid #4b9755;
+    background: #0b426e;
+    border: thin solid #6ab4d1;
   }
   .primary {
     color: #fff;
-    background: #45a752;
-    border: thin solid #4b9755;
+    background: #0e66ad;
+    border: thin solid #6ab4d1;
   }
   .primary:active {
-    background: #4ce260;
-    border: thin solid #7ef35b;
+    background: #0e66ad;
+    border: thin solid #6ab4d1;
   }
   .secondary {
     color: #000;
@@ -423,8 +423,8 @@
   }
   .dark {
     color: #fff;
-    background: #04612e;
-    border: thin solid #327a32;
+    background: #0e66ad;
+    border: thin solid #799dc5;
   }
   .dark:active {
     background: #00182c;
@@ -490,4 +490,52 @@
     overflow-wrap: break-word;
     font-size: 0.8rem;
   }
+
+  /* --------------------------slider------------------------- */
+  .slidecontainer {
+    width: 100%; /* Width of the outside container */
+  }
   
+  /* The slider itself */
+  .slider {
+ 
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
+    background: #dbdada; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+  }
+  
+  /* Mouse-over effects */
+  .slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+  }
+  
+  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #0e66ad; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #6e706f; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+
+  
+  .slider::-webkit-slider-runnable-track {
+    color: #0c5688;
+  }
+
+  .hidden{
+    visibility: hidden;
+  }
