@@ -1,0 +1,22 @@
+data;
+
+set itens := Item1 Item2 Item3 Item4
+Item5 Item6 Item7 Mitico1 Mitico2 Mitico3 Bota1 Bota2 Bota3;
+
+
+param: 		valor peso mitico  bota :=
+Item1 		200 	1		0	  0
+Item2 		200 	1		0	  0
+Item3 		600 	1		0	  0
+Item4 		600 	1		0	  0
+Item5 		700 	1		0	  0
+Item6 		800 	1		0	  0
+Item7 		800 	1		0	  0
+Mitico1		2000    1		1	  0
+Mitico2		3000    1		1	  0
+Mitico3		1300    1		1	  0
+Bota1       2000    1		0	  1
+Bota2       3000    1		0	  1
+Bota3       1600    1		0	  1
+;
+

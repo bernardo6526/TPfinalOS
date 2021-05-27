@@ -97,7 +97,51 @@ addItem(
 
 #rodar codigo de otimizacao e preencher vetor build com os melhores itens escolhidos
 
+import amplpy
+from amplpy import AMPL, Environment
+import os
 
+os.chdir(os.path.dirname(__file__) or os.curdir)
+try:
+    # Create an AMPL instance
+    ampl = AMPL(
+            Environment('.\env\Lib\site-packages\amplpy'))
+
+    """
+        # If the AMPL installation directory is not in the system search path:
+        from amplpy import Environment
+        ampl = AMPL(
+            Environment('full path to the AMPL installation directory'))
+        """
+
+    if argc > 1:
+        ampl.setOption("solver", argv[1])
+
+    # Read the model and data files.
+    ampl.read('models/mochilalol.mod')
+    ampl.readData('models/mochilalol.dat')
+
+    # Solve
+    ampl.solve()
+
+    # Get objective entity by AMPL name
+    totalcost = ampl.getObjective("Total_Cost")
+    objective = totalcost.value()
+
+    # Resolve and display objective
+    ampl.solve()
+    print("New objective value:", totalcost.value())
+
+    # Get the values of the variable Buy in a dataframe object
+    x = ampl.getVariable("X")
+    df = x.getValues()
+except Exception as e:
+    print(e)
+    raise
+
+
+
+   
 
 
 
