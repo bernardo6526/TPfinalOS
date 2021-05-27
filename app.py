@@ -1,7 +1,11 @@
 from flask import Flask, redirect, url_for, render_template, request
+from mip import Model, xsum, maximize, BINARY
+import sys
+
 
 contador = 0
 itens = {}
+mochila = {}
 campeao = []
 
 
@@ -18,7 +22,7 @@ if __name__ == '__main__':
 def form_get():
     if request.method == "POST": #post feito no submit
 	    campeao = request.form
-	    return render_template("build.html",campeao=campeao,build=itens)
+	    return render_template("build.html",campeao=campeao,build=mochila)
     else: #é feito um get quando a página é carregada
 	    return render_template("index.html")
 
@@ -31,6 +35,9 @@ def form_get():
 # and flatMagicPen(FMP) and magicPen(MP).
 
 #Defensive stats include health, armor, magic resistance(MR), and health regeneration(HR).
+
+def imprimir(msg):
+  print(msg,file=sys.stderr)
 
 def addItem(name, valor, peso, mitico, bota, ad, atksp, crit, ls, let, ARMP, ah, mana, manaRegen, heal, sp, ov, fmp, mp, health, armor, mr, hr):
   global contador
@@ -68,6 +75,12 @@ def addItem(name, valor, peso, mitico, bota, ad, atksp, crit, ls, let, ARMP, ah,
   itens.update(item)
   contador += 1
 
+def calculoValor(id):
+  valor = itens[i]['valor']
+  valor+= 300
+  itens[i]['valor'] = valor
+  return valor
+
 addItem(
   #name,         valor, peso, mitico, bota
   "Eco de Luden",-200,    1,    0,      0,
@@ -90,68 +103,67 @@ addItem(
   0,          0,    0,0
 )
 
-#calcular valor para cada item
-#valor = 0
-#for item in itens:
-  #valor = item['ad']*
-
 #rodar codigo de otimizacao e preencher vetor build com os melhores itens escolhidos
 
-from amplpy import AMPL, Environment
-import os
+# exemplo
+#valor = [10, 9, 8, 7, 6, 5,4]
+#peso = [1, 1, 1, 1, 1, 1,1]
+#mitico = [1, 1, 0, 0, 0, 0,0]
+#bota = [0, 0, 1, 1, 0, 0,0]
 
-import sys
+valor = []
+peso = []
+mitico = []
+bota = []
 
-path = 'C:\Python38\Lib\site-packages\\amplpy'
-#path = os.environ['VIRTUAL_ENV']+'\Lib\site-packages\\amplpy'
-#sys.path.append(path)
-#sys.path.insert(0, path)
+#preenche os vetores
+for i in range(len(itens)):
+  valorCalculado = calculoValor(i)
+  valor.append(valorCalculado)
+  peso.append(itens[i]['peso'])
+  mitico.append(itens[i]['mitico'])
+  bota.append(itens[i]['bota'])
 
-try:
-    # Create an AMPL instance
-    
-    print("------------------------\n")
-    print(path,file=sys.stderr)
-    print("------------------------\n")
+capacidade = 6
+qtdItens = range(len(peso))
 
-    #'full path to the folder that contains the AMPL executable'
-    print("------------------------\n")
-    print(os.pathsep + path,file=sys.stderr)
-    print("------------------------\n")
-    os.environ['PATH'] += os.pathsep + path
-    ampl = AMPL()
+m = Model()
 
-    """
-        # If the AMPL installation directory is not in the system search path:
-        from amplpy import Environment
-        ampl = AMPL(
-            Environment('full path to the AMPL installation directory'))
-        """
+# variáveis de decisao (vetor X)
+# binary garante que nao pode levar itens repetidos 
+x = [m.add_var(var_type=BINARY) for i in qtdItens]
 
-    if argc > 1:
-        ampl.setOption("solver", argv[1])
+# maximiza o ganho
+m.objective = maximize(xsum(valor[i] * x[i] for i in qtdItens))
 
-    # Read the model and data files.
-    ampl.read('models/mochilalol.mod')
-    ampl.readData('models/mochilalol.dat')
+#nao pode ultrapassar 6 itens
+m += xsum(peso[i] * x[i] for i in qtdItens) <= capacidade
 
-    # Solve
-    ampl.solve()
+#nao pode levar mais de 1 item do tipo mitico
+m += xsum(mitico[i] * x[i] for i in qtdItens) <= 1
 
-    # Get objective entity by AMPL name
-    totalcost = ampl.getObjective("Total_Cost")
-    objective = totalcost.value()
+#nao pode levar mais de 1 item do tipo bota
+m += xsum(bota[i] * x[i] for i in qtdItens) <= 1
 
-    # Resolve and display objective
-    ampl.solve()
-    print("New objective value:", totalcost.value())
 
-    # Get the values of the variable Buy in a dataframe object
-    x = ampl.getVariable("X")
-    df = x.getValues()
-except Exception as e:
-    print(e)
-    raise
+m.optimize()
+
+selected = [i for i in qtdItens if x[i].x >= 0.99]
+imprimir("selected items: {}".format(selected))
+
+for j in range(len(selected)):
+  idEscolhido = selected[j]
+  itemLevado = {
+    idEscolhido:{
+      "name": itens[idEscolhido]['name'],      
+    }
+  }
+  mochila.update(itemLevado)
+
+
+imprimir(mochila)
+
+
 
 
 
