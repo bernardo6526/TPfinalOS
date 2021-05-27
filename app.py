@@ -97,15 +97,29 @@ addItem(
 
 #rodar codigo de otimizacao e preencher vetor build com os melhores itens escolhidos
 
-import amplpy
 from amplpy import AMPL, Environment
 import os
 
-os.chdir(os.path.dirname(__file__) or os.curdir)
+import sys
+
+path = 'C:\Python38\Lib\site-packages\\amplpy'
+#path = os.environ['VIRTUAL_ENV']+'\Lib\site-packages\\amplpy'
+#sys.path.append(path)
+#sys.path.insert(0, path)
+
 try:
     # Create an AMPL instance
-    ampl = AMPL(
-            Environment('.\env\Lib\site-packages\amplpy'))
+    
+    print("------------------------\n")
+    print(path,file=sys.stderr)
+    print("------------------------\n")
+
+    #'full path to the folder that contains the AMPL executable'
+    print("------------------------\n")
+    print(os.pathsep + path,file=sys.stderr)
+    print("------------------------\n")
+    os.environ['PATH'] += os.pathsep + path
+    ampl = AMPL()
 
     """
         # If the AMPL installation directory is not in the system search path:
