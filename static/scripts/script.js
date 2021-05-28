@@ -13,7 +13,7 @@ onload = () => {
     //const dadosCarregados = JSON.parse(localStorage.getItem('dados'));
     // if (dadosCarregados) dados = dadosCarregados;
 
-    addCampeao("Corki",0,0,1,1,1,1,0,0,0,0.5,1,1,0,0,1,1,1,1,1,1,1);
+    carregaCampeoes();
     console.log(campeoes);
 
     // cria um objeto com as abas
@@ -153,4 +153,84 @@ function addCampeao(name, tank, suporte, ad, atksp, crit, ls,
     
     campeoes.push(campeao)
     contador += 1
+}
+
+function carregaCampeoes(){
+    //addCampeao("Corki",0,0,1,1,1,1,0,0,0,0.5,1,1,0,0,1,1,1,1,1,1,1);
+    addCampeao(
+        //name,         tank, suporte,
+        "Corki",          0,      0,    
+        //ad,atksp, crit, ls, let, ARMP
+        1,  1,      1,    1,  0,  0,
+        //ap , ah, mana, manaRegen, heal, sp, ov, fmp, mp
+         0,   0.3,   0.1,    0.1,   0,   0,  1,  1,  1,
+        //health, armor, mr, hr
+        0,          0,    0, 0
+    );
+
+    addCampeao(
+        //name,         tank, suporte,
+        "Zac",           1,      0,    
+        //ad,atksp, crit, ls, let, ARMP
+        0,  0,      0,    0,  0,  0,
+        //ap , ah, mana, manaRegen, heal, sp, ov, fmp, mp
+         1,   1,   0,      0,       1,    0,  1,  1,  1,
+        //health, armor, mr, hr
+        1,          1,    1, 1
+    );
+
+    addCampeao(
+        //name,         tank, suporte,
+        "Soraka",         0,      1,    
+        //ad,atksp, crit, ls, let, ARMP
+        0,  0,      0,    0,  0,  0,
+        //ap , ah, mana, manaRegen, heal, sp, ov, fmp, mp
+         1,    1,   1,      1,       1,    1,  0,  0,  0,
+        //health, armor, mr, hr
+        1,          0,   0, 1
+    );
+
+    addCampeao(
+        //name,         tank, suporte,
+        "Nocturne",        0,      0,    
+        //ad,atksp, crit, ls, let, ARMP
+        1,  1,      0,    1,  1,  1,
+        //ap , ah, mana, manaRegen, heal, sp, ov, fmp, mp
+         0,    1,   0.1,      0.1,   0,   0,  1,  0,  0,
+        //health, armor, mr, hr
+        0,          0,   0, 0
+    );
+
+    addCampeao(
+        //name,         tank, suporte,
+        "Sett",          1,      0,    
+        //ad,atksp, crit, ls, let, ARMP
+        1,  1,      0,    1,  1,  1,
+        //ap , ah, mana, manaRegen, heal, sp, ov, fmp, mp
+         0,    0,   0,      0,      0,    0,  0,  0,  0,
+        //health, armor, mr, hr
+        1,          1,   1, 1
+    );
+
+    addCampeao(
+        //name,         tank, suporte,
+        "Ryze",            0,      0,    
+        //ad,atksp, crit, ls, let, ARMP
+        0,      0,     0,  0,   0,   0,
+        //ap , ah, mana, manaRegen, heal, sp, ov, fmp, mp
+        0.7,    0,    1,       0.1,    0,  0,  0,  0,  0,
+        //health, armor, mr, hr
+        0.3,          0,  0,  0
+    );
+
+    addCampeao(
+        //name,         tank, suporte,
+        "Jinx",            0,      0,    
+        //ad,atksp, crit, ls, let, ARMP
+        0.8,      1,   1,  0.7,   0,   1,
+        //ap , ah, mana, manaRegen, heal, sp, ov, fmp, mp
+        0,      0,    0,         0,    0,  0,  0,  0,  0,
+        //health, armor, mr, hr
+        0,          0,  0,  0
+    );
 }
