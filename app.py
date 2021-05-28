@@ -600,6 +600,18 @@ def carregaItens():
     0,           0,  0,  0
   )
 
+  #ms = 0
+  addItem(
+    #name,                valor, peso, mitico, bota
+    "Arco-escudo Imortal",-3400,    1,      1,    0,
+    #ad,atksp, crit,  ls,   let, ARMP
+    55+20, 20,   20,  10,     0,    0,
+    #ap #ah, mana, manaRegen, heal, sp,  ov, fmp, mp
+    0,    0,    0,         0,    0,  0,   0,   0,  0,
+    #health, armor, mr, hr
+    0+200,       0,  0,  0
+  )
+
   
 def otimizacao():
   carregaItens()
