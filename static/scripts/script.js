@@ -156,7 +156,17 @@ function addCampeao(name, tank, suporte, ad, atksp, crit, ls,
 }
 
 function carregaCampeoes(){
-    //addCampeao("Corki",0,0,1,1,1,1,0,0,0,0.5,1,1,0,0,1,1,1,1,1,1,1);
+    addCampeao(
+        //name,         tank, suporte,
+        "Zed",          0,      0,    
+        //ad,atksp, crit, ls, let, ARMP
+        1,  0,      0,    0.1,  1,  1,
+        //ap , ah, mana, manaRegen, heal, sp, ov, fmp, mp
+         0,   1,   0,       0,       0,   0,  0,  1,  0,
+        //health, armor, mr, hr
+        0,          0,    0, 0
+    );
+
     addCampeao(
         //name,         tank, suporte,
         "Corki",          0,      0,    
