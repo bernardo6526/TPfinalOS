@@ -50,7 +50,7 @@ def form_get():
 def imprimir(msg):
   print(msg,file=sys.stderr)
 
-def addItem(name, valor, peso, mitico, bota, ad, atksp, crit, ls, let, ARMP, ap, ah, mana, manaRegen, heal, sp, ov, fmp, mp, health, armor, mr, hr):
+def addItem(name, valor, peso, mitico, bota, ms,ad, atksp, crit, ls, let, ARMP, ap, ah, mana, manaRegen, heal, sp, ov, fmp, mp, health, armor, mr, hr):
   global contador
   item = {
       contador:{
@@ -60,6 +60,7 @@ def addItem(name, valor, peso, mitico, bota, ad, atksp, crit, ls, let, ARMP, ap,
         "peso" : float(peso),
         "mitico": float(mitico),
         "bota": float(bota),
+        "ms": float(ms),
         #offensive stats
         "ad": float(ad),
         "atksp": float(atksp),
@@ -96,6 +97,8 @@ def calculoValor(id):
   pesoAtributo = 5
   baseStat = 0.1
 
+  #mov speed do item
+  ms = itens[id]['ms']*pesoAtributo
   #dados equipe inimiga
   champ['dano'] = float(champ['dano'])*pesoAtributo
   champ['tanks'] = float(champ['tanks'])*pesoAtributo
@@ -137,7 +140,7 @@ def calculoValor(id):
   imprimir("-----DEBUG-------\n")
   
   #offensive stats
-  valor += champ['ad']*itens[id]['ad'] + champ['atksp']*itens[id]['atksp']
+  valor += ms+ champ['ad']*itens[id]['ad'] + champ['atksp']*itens[id]['atksp']
   valor += champ['crit']*itens[id]['crit'] + champ['ls']*(itens)[id]['ls']
   valor += champ['let']*itens[id]['let']*(5-champ['tanks']) + champ['ARMP']*itens[id]['ARMP']*champ['tanks']
 
@@ -158,8 +161,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,         valor, peso, mitico, bota
-    "Eco de Luden",-3400,    1,      1,     0,
+    #name,         valor, peso, mitico, bota, ms
+    "Eco de Luden",-3400,    1,      1,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -170,8 +173,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,            valor, peso, mitico, bota
-    "Cajado do Vazio",-2700,    1,      0,     0,
+    #name,            valor, peso, mitico, bota, ms
+    "Cajado do Vazio",-2700,    1,      0,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -182,8 +185,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,                 valor, peso, mitico, bota
-    "Ampulheta de Zhonyas",-2600,    1,      0,     0,
+    #name,                 valor, peso, mitico, bota, ms
+    "Ampulheta de Zhonyas",-2600,    1,      0,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -194,8 +197,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,             valor, peso, mitico, bota
-    "Gume do Infinito",-3400,    1,      0,     0,
+    #name,             valor, peso, mitico, bota, ms
+    "Gume do Infinito",-3400,    1,      0,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     70,     0,   30,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -206,8 +209,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,          valor, peso, mitico, bota
-    "Mata-Cráquens",-3400,    1,      1,     0,
+    #name,          valor, peso, mitico, bota, ms
+    "Mata-Cráquens",-3400,    1,      1,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     65,  25+40,  20,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -218,8 +221,8 @@ def carregaItens():
 
   #ms = 45
   addItem(
-    #name,               valor, peso, mitico, bota
-    "Passos de Mercúrio",-1100,    1,      0,     1,
+    #name,               valor, peso, mitico, bota, ms
+    "Passos de Mercúrio",-1100,    1,      0,     1, 45,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -230,8 +233,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,                valor, peso, mitico, bota
-    "Grevas do Berserker",-1100,    1,      0,     1,
+    #name,                valor, peso, mitico, bota, ms
+    "Grevas do Berserker",-1100,    1,      0,     1, 0,
     #ad,atksp, crit, ls, let, ARMP
     0,     35,    0,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -242,8 +245,8 @@ def carregaItens():
 
   #ms = 45
   addItem(
-    #name,                      valor, peso, mitico, bota
-    "Botas Ionianas da Lucidez",-1100,    1,      0,     1,
+    #name,                      valor, peso, mitico, bota, ms
+    "Botas Ionianas da Lucidez",-1100,    1,      0,     1, 45,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -254,8 +257,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,     valor, peso, mitico, bota
-    "Redenção",-2300,    1,      0,     0,
+    #name,     valor, peso, mitico, bota, ms
+    "Redenção",-2300,    1,      0,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -266,8 +269,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,                    valor, peso, mitico, bota
-    "Manopla do Raio de Gelo",-2800,    1,      1,     0,
+    #name,                    valor, peso, mitico, bota, ms
+    "Manopla do Raio de Gelo",-2800,    1,      1,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,   0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -278,8 +281,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,                 valor, peso, mitico, bota
-    "Semblante Espiritual",-2900,    1,      0,     0,
+    #name,                 valor, peso, mitico, bota, ms
+    "Semblante Espiritual",-2900,    1,      0,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -290,8 +293,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,                    valor, peso, mitico, bota
-    "Hino Bélico de Shurelya",-2500,    1,      1,     0,
+    #name,                    valor, peso, mitico, bota, ms
+    "Hino Bélico de Shurelya",-2500,    1,      1,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -302,8 +305,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,               valor, peso, mitico, bota
-    "Armadura de Warmog",-3000,    1,      0,     0,
+    #name,               valor, peso, mitico, bota, ms
+    "Armadura de Warmog",-3000,    1,      0,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -314,8 +317,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,               valor, peso, mitico, bota
-    "Sedenta por Sangue",-3400,    1,      0,     0,
+    #name,               valor, peso, mitico, bota, ms
+    "Sedenta por Sangue",-3400,    1,      0,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     55,     0,   20, 20,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -326,8 +329,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,                    valor, peso, mitico, bota
-    "Crepúsculo de Draktharr",-3200,    1,      1,     0,
+    #name,                    valor, peso, mitico, bota, ms
+    "Crepúsculo de Draktharr",-3200,    1,      1,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     60,     0,    0,  0,  18,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -338,8 +341,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,                    valor, peso, mitico, bota
-    "Espada do Rei Destruído",-3200,    1,      0,     0,
+    #name,                    valor, peso, mitico, bota, ms
+    "Espada do Rei Destruído",-3200,    1,      0,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     40,    25,    0, 10,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -350,8 +353,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,              valor, peso, mitico, bota
-    "Cajado do Arcanjo",-3000,    1,      0,     0,
+    #name,              valor, peso, mitico, bota, ms
+    "Cajado do Arcanjo",-3000,    1,      0,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -360,10 +363,10 @@ def carregaItens():
     0,           0,  0,  0
   )
   
-  #ms = 7%
+  #ms = 7% , mov speed medio do jogo = 325
   addItem(
-    #name,             valor, peso, mitico, bota
-    "Canhão Fumegante",-2500,    1,      0,     0,
+    #name,             valor, peso, mitico, bota, ms
+    "Canhão Fumegante",-2500,    1,      0,     0, 325*0.07,
     #ad,atksp, crit, ls, let, ARMP
     0,     35,   20,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -374,8 +377,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,             valor, peso, mitico, bota
-    "Turíbulo Ardente",-2300,    1,      0,     0,
+    #name,             valor, peso, mitico, bota, ms
+    "Turíbulo Ardente",-2300,    1,      0,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -386,8 +389,8 @@ def carregaItens():
 
   #ms = 45
   addItem(
-    #name,                  valor, peso, mitico, bota
-    "Sapatos do Feiticeiro",-1100,    1,      0,     1,
+    #name,                  valor, peso, mitico, bota, ms
+    "Sapatos do Feiticeiro",-1100,    1,      0,     1, 45,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -398,8 +401,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,                       valor, peso, mitico, bota
-    "Regenerador de Pedra Lunar",-2500,    1,      1,     0,
+    #name,                       valor, peso, mitico, bota, ms
+    "Regenerador de Pedra Lunar",-2500,    1,      1,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -410,8 +413,8 @@ def carregaItens():
 
   #ms = 7%
   addItem(
-    #name,               valor, peso, mitico, bota
-    "Dançarina Fantasma",-2600,    1,      0,     0,
+    #name,               valor, peso, mitico, bota, ms
+    "Dançarina Fantasma",-2600,    1,      0,     0, 325*0.07,
     #ad,atksp, crit, ls, let, ARMP
     20,    25,   20,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp, ov, fmp, mp
@@ -422,8 +425,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,       valor, peso, mitico, bota
-    "Criafendas",-3200,    1,      1,     0,
+    #name,       valor, peso, mitico, bota, ms
+    "Criafendas",-3200,    1,      1,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap   #ah, mana, manaRegen, heal, sp,   ov, fmp, mp
@@ -434,8 +437,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,            valor, peso, mitico, bota
-    "Sinal de Sterak",-3100,    1,      0,     0,
+    #name,            valor, peso, mitico, bota, ms
+    "Sinal de Sterak",-3100,    1,      0,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     50,     0,    0,  0,   0,    0,
     #ap  #ah, mana, manaRegen, heal, sp,  ov, fmp, mp
@@ -446,8 +449,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,          valor, peso, mitico, bota
-    "Hidra Raivosa",-3300,    1,      0,     0,
+    #name,          valor, peso, mitico, bota, ms
+    "Hidra Raivosa",-3300,    1,      0,     0, 0,
     #ad,atksp, crit, ls, let, ARMP
     65,     0,    0,  0,   0,    0,
     #ap  #ah, mana, manaRegen, heal, sp,  ov, fmp, mp
@@ -458,8 +461,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,                        valor, peso, mitico, bota
-    "Lembranças do Lorde Dominik",-3000,    1,      0,    0,
+    #name,                        valor, peso, mitico, bota, ms
+    "Lembranças do Lorde Dominik",-3000,    1,      0,    0, 0,
     #ad,atksp, crit, ls, let, ARMP
     30,     0,   20,  0,   0,   35,
     #ap  #ah, mana, manaRegen, heal, sp,  ov, fmp, mp
@@ -470,8 +473,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,                      valor, peso, mitico, bota
-    "Cetro de Cristal de Rylai",-3000,    1,      0,    0,
+    #name,                      valor, peso, mitico, bota, ms
+    "Cetro de Cristal de Rylai",-3000,    1,      0,    0, 0,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap  #ah, mana, manaRegen, heal, sp,  ov, fmp, mp
@@ -482,8 +485,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,                      valor, peso, mitico, bota
-    "Lâmina Fantasma de Youmuu",-3000,    1,      0,    0,
+    #name,                      valor, peso, mitico, bota, ms
+    "Lâmina Fantasma de Youmuu",-3000,    1,      0,    0, 0,
     #ad,atksp, crit, ls, let, ARMP
     60,     0,    0,  0,  18,    0,
     #ap  #ah, mana, manaRegen, heal, sp,  ov, fmp, mp
@@ -494,8 +497,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,                      valor, peso, mitico, bota
-    "Capuz da Morte de Rabadon",-3600,    1,      0,    0,
+    #name,                      valor, peso, mitico, bota, ms
+    "Capuz da Morte de Rabadon",-3600,    1,      0,    0, 0,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap    #ah, mana, manaRegen, heal, sp,  ov, fmp, mp
@@ -506,8 +509,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,    valor, peso, mitico, bota
-    "Eclipse",-3200,    1,      1,    0,
+    #name,    valor, peso, mitico, bota, ms
+    "Eclipse",-3200,    1,      1,    0, 0,
     #ad,atksp, crit, ls, let, ARMP
     55,     0,    0,  0,  18,  0+16,
     #ap #ah, mana, manaRegen, heal, sp,  ov, fmp, mp
@@ -518,8 +521,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,                 valor, peso, mitico, bota
-    "Colhedor de Essência",-2800,    1,      0,    0,
+    #name,                 valor, peso, mitico, bota, ms
+    "Colhedor de Essência",-2800,    1,      0,    0, 0,
     #ad,atksp, crit, ls, let, ARMP
     45,     0,   20,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp,  ov, fmp, mp
@@ -530,8 +533,8 @@ def carregaItens():
 
   #ms = 7%
   addItem(
-    #name,              valor, peso, mitico, bota
-    "Furacão de Runaan",-2600,    1,      0,    0,
+    #name,              valor, peso, mitico, bota, ms
+    "Furacão de Runaan",-2600,    1,      0,    0, 325*0.07,
     #ad,atksp, crit, ls, let, ARMP
     0,     45,   20,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp,  ov, fmp, mp
@@ -542,8 +545,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,                 valor, peso, mitico, bota
-    "Armadura de Espinhos",-2700,    1,      0,    0,
+    #name,                 valor, peso, mitico, bota, ms
+    "Armadura de Espinhos",-2700,    1,      0,    0, 0,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp,  ov, fmp, mp
@@ -554,8 +557,8 @@ def carregaItens():
   
   #ms = 0
   addItem(
-    #name,                 valor, peso, mitico, bota
-    "Presságio de Randuin",-2700,    1,      0,    0,
+    #name,                 valor, peso, mitico, bota, ms
+    "Presságio de Randuin",-2700,    1,      0,    0, 0,
     #ad,atksp, crit, ls, let, ARMP
     0,      0,    0,  0,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp,  ov, fmp, mp
@@ -566,8 +569,8 @@ def carregaItens():
   
   #ms = 0
   addItem(
-    #name,       valor, peso, mitico, bota
-    "A Coletora",-3000,    1,      0,    0,
+    #name,       valor, peso, mitico, bota, ms
+    "A Coletora",-3000,    1,      0,    0, 0,
     #ad,atksp, crit, ls, let, ARMP
     55,     0,   20,  0,  12,    0,
     #ap #ah, mana, manaRegen, heal, sp,  ov, fmp, mp
@@ -578,8 +581,8 @@ def carregaItens():
 
   #ms = 20
   addItem(
-    #name,            valor, peso, mitico, bota
-    "Limite da Razão",-3100,    1,      0,    0,
+    #name,            valor, peso, mitico, bota, ms
+    "Limite da Razão",-3100,    1,      0,    0, 20,
     #ad,atksp, crit, ls, let, ARMP
     40,    40,    0, 12,   0,    0,
     #ap #ah, mana, manaRegen, heal, sp,  ov, fmp, mp
@@ -590,8 +593,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,               valor, peso, mitico, bota
-    "Lâmina Sanguinária",-3000,    1,      0,    0,
+    #name,               valor, peso, mitico, bota, ms
+    "Lâmina Sanguinária",-3000,    1,      0,    0, 0,
     #ad,atksp, crit,  ls,   let, ARMP
     50,    50,    0,   0,  10+8,    0,
     #ap #ah, mana, manaRegen, heal, sp,  ov, fmp, mp
@@ -602,8 +605,8 @@ def carregaItens():
 
   #ms = 0
   addItem(
-    #name,                valor, peso, mitico, bota
-    "Arco-escudo Imortal",-3400,    1,      1,    0,
+    #name,                valor, peso, mitico, bota, ms
+    "Arco-escudo Imortal",-3400,    1,      1,    0, 0,
     #ad,atksp, crit,  ls,   let, ARMP
     55+20, 20,   20,  10,     0,    0,
     #ap #ah, mana, manaRegen, heal, sp,  ov, fmp, mp
@@ -631,6 +634,10 @@ def otimizacao():
 
   #preenche os vetores
   for i in range(len(itens)):
+    if(int(itens[i]['mitico']) == 1):
+      itens[i]['name'] = itens[i]['name'] + " (Mítico)"
+    if(int(itens[i]['bota']) == 1):
+      itens[i]['name'] = itens[i]['name'] + " (Bota)"
     valorCalculado = calculoValor(i)
     valor.append(valorCalculado)
     peso.append(itens[i]['peso'])
@@ -675,12 +682,18 @@ def otimizacao():
   for j in range(len(selected)):
     idEscolhido = int(selected[j])
     itemLevado = {
-      idEscolhido:{
-        "name": itens[idEscolhido]['name'],      
+      j:{
+        "name": itens[idEscolhido]['name'] + " ["+str(itens[idEscolhido]['valor'])+"]",
+        "valor": itens[idEscolhido]['valor'],      
       }
     }
     mochila.update(itemLevado)
-
+  
+  #ordena a mochila pelo valor
+  for i in range(len(mochila)):
+    for j in range(len(mochila)-i-1):
+        if(int(mochila[j]["valor"]) < int(mochila[j+1]["valor"])):
+            mochila[j],mochila[j+1] = mochila[j+1],mochila[j]
 
   imprimir(mochila)
 
